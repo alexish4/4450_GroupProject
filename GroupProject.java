@@ -15,7 +15,7 @@ public class GroupProject {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Basic basic = new Basic();
+        Basic3D basic = new Basic3D();
         basic.start();
     }
     
