@@ -184,6 +184,8 @@ public class FPCameraController {
     
     private void render() {
         try{
+            
+            glEnable(GL_DEPTH_TEST);
             glBegin(GL_QUADS);
             // top
             glColor3f(1.0f,0.0f,0.0f);  //red
