@@ -103,12 +103,18 @@ public class Chunk {
     //Update this when we add texture
     private float[] getCubeColor(Block block) {
         switch (block.getID()) {
-            case 1: 
+            case 0: 
                 return new float[] {0, 1, 0};
+            case 1:
+                return new float[] {1, 1, 0};
             case 2:
                 return new float[] {1, 0.5f, 0};
             case 3: 
                 return new float[] {0, 0f, 1f};
+            case 4:
+                return new float[] {0.5f, 0.5f, 0.5f};
+            case 5:
+                return new float[] {0, 0, 0};
         }
         return new float[] {1,1,1};
     }
@@ -120,14 +126,20 @@ public class Chunk {
         for (int x = 0; x < CHUNK_SIZE; x++) {
             for (int y = 0; y < CHUNK_SIZE; y++) {
                 for (int z = 0; z < CHUNK_SIZE; z++) {
-                    if(r.nextFloat()>0.7f){
+                    if(r.nextFloat()>0.8f){
                         Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Grass);
-                    } else if(r.nextFloat()>0.4f){
+                    } else if(r.nextFloat()>0.6f){
                         Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
-                    }else if(r.nextFloat()>0.2f){
+                    }else if(r.nextFloat()>0.4f){
                         Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Water);
-                    }else{
+                    }else if(r.nextFloat()>0.2f){
                         Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
+                    } else if(r.nextFloat()>0.1f){
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
+                    } else if(r.nextFloat()>0.0f){
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Bedrock);
+                    } else {
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Default);
                     }
                 }
             }
