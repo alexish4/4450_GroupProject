@@ -24,6 +24,7 @@ public class FPCameraController {
     //the rotation around the X axis of the camera
     private float pitch = 0.0f;
     private Vector3Float me;
+    private Chunk chunk = new Chunk(0,0,0);
     
     public FPCameraController(float x, float y, float z)
     {
@@ -174,7 +175,7 @@ public class FPCameraController {
             camera.lookThrough();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             //you would draw your scene here.
-            render();
+            chunk.render();
             //draw the buffer to the screen
             Display.update();
             Display.sync(60);

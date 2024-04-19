@@ -15,13 +15,15 @@ import org.lwjgl.util.glu.GLU;
  * @author alexhernandez, ethan, megan
  */
 public class Basic3D {
-    private FPCameraController fp = new FPCameraController(0f,0f,0f);
+    private FPCameraController fp;
     private DisplayMode displayMode;
+    
     
     public void start() {
         try {
             createWindow();
             initGL();
+            fp = new FPCameraController(0f, 0f, 0f);
             fp.gameLoop(); //render();
         }
         catch (Exception e) {
@@ -51,6 +53,9 @@ public class Basic3D {
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f); //specifying what background color
                                                                 //we want through RGB values and Alpha
         glMatrixMode(GL_PROJECTION); //loading our camera using projection to view scene
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
+        glEnable(GL_DEPTH_TEST);
         glLoadIdentity(); //load identity matrix
         
         GLU.gluPerspective(100.0f, (float)displayMode.getWidth() /
