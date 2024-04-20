@@ -148,14 +148,14 @@ public class Chunk {
     public static float[] createTexCube(float x, float y, Block block) {
         float offset = (1024f / 16);
         switch (block.getID()) {
-            case 1:
+            case 0: //slides are wrong according to video lecture this is grass
                 return new float[] {
-                    // BOTTOM QUAD(DOWN=+Y)
+                    // BOTTOM QUAD(DOWN=+Y), // this should be top?
                     x + offset*3, y + offset*10,
                     x + offset*2, y + offset*10,
                     x + offset*2, y + offset*9,
                     x + offset*3, y + offset*9,
-                    // TOP!
+                    // TOP!, //this should be bottom?
                     x + offset*3, y + offset*1,
                     x + offset*2, y + offset*1,
                     x + offset*2, y + offset*0,
@@ -180,6 +180,40 @@ public class Chunk {
                     x + offset*4, y + offset*0,
                     x + offset*4, y + offset*1,
                     x + offset*3, y + offset*1
+
+                };
+            default:
+                return new float[] {
+                    // BOTTOM QUAD(DOWN=+Y)
+                    x + offset*3, y + offset*0,
+                    x + offset*4, y + offset*0,
+                    x + offset*4, y + offset*1,
+                    x + offset*3, y + offset*1,
+                    // TOP!
+                    x + offset*3, y + offset*0,
+                    x + offset*4, y + offset*0,
+                    x + offset*4, y + offset*1,
+                    x + offset*3, y + offset*1,
+                    // FRONT QUAD
+                    x + offset*3, y + offset*0,
+                    x + offset*4, y + offset*0,
+                    x + offset*4, y + offset*1,
+                    x + offset*3, y + offset*1,
+                    // BACK QUAD
+                    x + offset*3, y + offset*0,
+                    x + offset*4, y + offset*0,
+                    x + offset*4, y + offset*1,
+                    x + offset*3, y + offset*1,
+                    // LEFT QUAD
+                    x + offset*3, y + offset*0,
+                    x + offset*4, y + offset*0,
+                    x + offset*4, y + offset*1,
+                    x + offset*3, y + offset*1,
+                    // RIGHT QUAD
+                    x + offset*3, y + offset*0,
+                    x + offset*4, y + offset*0,
+                    x + offset*4, y + offset*1,
+                    x + offset*3, y + offset*1,
 
                 };
         }
