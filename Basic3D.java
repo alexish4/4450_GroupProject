@@ -56,6 +56,12 @@ public class Basic3D {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_COLOR_ARRAY);
         glEnable(GL_DEPTH_TEST);
+        
+        //part of texture mapping slides
+        glEnable(GL_TEXTURE_2D);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        
+        
         glLoadIdentity(); //load identity matrix
         
         GLU.gluPerspective(100.0f, (float)displayMode.getWidth() /
