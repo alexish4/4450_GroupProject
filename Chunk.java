@@ -48,6 +48,8 @@ public class Chunk {
     
     //call when we modify chunk
     public void rebuildMesh(float startX, float startY, float startZ) {
+        SimplexNoise noise = new SimplexNoise(CHUNK_SIZE, 0.8, 1);
+        
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();
         
@@ -62,10 +64,13 @@ public class Chunk {
         for (float x = 0; x < CHUNK_SIZE; x+=1) {
             for (float z = 0; z < CHUNK_SIZE; z+=1) {
                 for (float y = 0; y < CHUNK_SIZE; y++) {
-                    VertexPositionData.put(createCube((float) (startX + x * CUBE_LENGTH), (float)(y * CUBE_LENGTH + (int)(CHUNK_SIZE * .8)),(float) (startZ + z *CUBE_LENGTH)));
-                    VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int) x][(int) y][(int) z])));
-                    VertexTextureData.put(createTexCube((float) 0, (float) 0,
+                    double height = (startY + (noise.getNoise((int)x, (int)y, (int)z)) * CUBE_LENGTH);
+                    if(y < height){
+                        VertexPositionData.put(createCube((float) (startX + x * CUBE_LENGTH), (float)(y * CUBE_LENGTH + (int)(CHUNK_SIZE * .8)),(float) (startZ + z *CUBE_LENGTH)));
+                        VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int) x][(int) y][(int) z])));
+                        VertexTextureData.put(createTexCube((float) 0, (float) 0,
                              Blocks[(int)(x)] [(int) (y)] [(int) (z)]));
+                    }
                 }
             }
         }
