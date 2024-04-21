@@ -148,7 +148,7 @@ public class Chunk {
     public static float[] createTexCube(float x, float y, Block block) {
         float offset = (1024f / 16);
         switch (block.getID()) {
-            case 0: //slides are wrong according to video lecture this is grass
+            case 1: //slides are wrong according to video lecture this is grass
                 return new float[] {
                     // BOTTOM QUAD(DOWN=+Y), // this should be top?
                     x + offset*3, y + offset*10,
