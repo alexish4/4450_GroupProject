@@ -67,11 +67,11 @@ public class Chunk {
                 for (float y = 0; y < height; y++) {
                     VertexPositionData.put(createCube((float) (startX + x * CUBE_LENGTH), (float)(y * CUBE_LENGTH + (int)(CHUNK_SIZE * .8)),(float) (startZ + z *CUBE_LENGTH)));
                     VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int) x][(int) y][(int) z])));
-                    VertexTextureData.put(createTexCube((float) 0, (float) 0,
+                    VertexTextureData.put(createCubeatLevel((float) 0, (float) 0, (float) height, y,
                          Blocks[(int)(x)] [(int) (y)] [(int) (z)]));
                 }
             }
-        }
+        }   
         VertexColorData.flip();
         VertexPositionData.flip();
         VertexTextureData.flip();
@@ -148,9 +148,27 @@ public class Chunk {
         return new float[] {1,1,1}; //we only need this according to texture mapping slides?
     }
     
-    public static float[] createTexCube(float x, float y, Block block) {
+    public static float[] createCubeatLevel(float x, float y, float height, float currentHeight, Block block) {
+        if (currentHeight == (int) height) {
+            return createTexCube(x, y, 0);
+        }
+        
+        //lower levels = bedrock, middle = stone, upper(under top layer)=dirt
+        float level = currentHeight/height;
+        if (level < 0.1) {
+            return createTexCube(x, y, 5);  //bedrock
+        }
+        else if (level < 0.7) {
+            return createTexCube(x, y, 3);  //stone
+        }
+        else {
+            return createTexCube(x, y, 2);  //dirt
+        }
+    }
+    
+    public static float[] createTexCube(float x, float y, int blockID) {
         float offset = (1024f / 16) / 1024f;
-        switch (block.getID()) {
+        switch (blockID) {
             case 0: //slides are wrong according to video lecture this is grass
                 return new float[] {
                     // BOTTOM QUAD(DOWN=+Y), // this should be top?
