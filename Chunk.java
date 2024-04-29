@@ -21,6 +21,7 @@ import org.newdawn.slick.util.ResourceLoader;
 public class Chunk {
     static final int CHUNK_SIZE = 30;
     static final int CUBE_LENGTH = 2;
+    static final int WATER_LEVEL = 13;      //random num for now for water level
     private Block[][][] Blocks;
     private int VBOVertexHandle;
     private int VBOColorHandle;
@@ -72,6 +73,17 @@ public class Chunk {
                 }
             }
         }   
+        
+        for (int x = 0; x < CHUNK_SIZE; x+=1) {
+            for (int z = 0; z < CHUNK_SIZE; z+=1) {
+                for (int y = 0; y < WATER_LEVEL; y++) {
+                    VertexPositionData.put(createCube((float) (startX + x * CUBE_LENGTH), (float)(y * CUBE_LENGTH + (int)(CHUNK_SIZE * .8)),(float) (startZ + z *CUBE_LENGTH)));
+                    VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int) x][(int) y][(int) z])));
+                    VertexTextureData.put(createTexCube(x, y, 4));    
+                }  
+            }
+        }
+        
         VertexColorData.flip();
         VertexPositionData.flip();
         VertexTextureData.flip();
@@ -150,7 +162,12 @@ public class Chunk {
     
     public static float[] createCubeatLevel(float x, float y, float height, float currentHeight, Block block) {
         if (currentHeight == (int) height) {
-            return createTexCube(x, y, 0);
+            if (currentHeight < WATER_LEVEL - 1) {
+                return createTexCube(x, y, 1);
+            }    
+            else {
+                return createTexCube(x, y, 0);
+            }
         }
         
         //lower levels = bedrock, middle = stone, upper(under top layer)=dirt
@@ -422,6 +439,7 @@ public class Chunk {
         
         r = new Random();
         Blocks = new Block[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
+        /*
         for (int x = 0; x < CHUNK_SIZE; x++) {
             for (int y = 0; y < CHUNK_SIZE; y++) {
                 for (int z = 0; z < CHUNK_SIZE; z++) {
@@ -442,7 +460,7 @@ public class Chunk {
                     }
                 }
             }
-        }
+        }*/
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();
         VBOTextureHandle = glGenBuffers();
