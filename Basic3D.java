@@ -66,7 +66,7 @@ public class Basic3D {
         glEnable(GL_TEXTURE_2D);
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         
-        
+                
         glLoadIdentity(); //load identity matrix
         
         GLU.gluPerspective(100.0f, (float)displayMode.getWidth() /
@@ -79,7 +79,7 @@ public class Basic3D {
         glLight(GL_LIGHT0, GL_SPECULAR, whiteLight);//sets our specular light
         glLight(GL_LIGHT0, GL_DIFFUSE, whiteLight);//sets our diffuse light
         glLight(GL_LIGHT0, GL_AMBIENT, whiteLight);//sets our ambient light
-        
+             
         glEnable(GL_LIGHTING);//enables our lighting
         glEnable(GL_LIGHT0);//enables light0
         
