@@ -52,12 +52,25 @@ public class FPCameraController {
     }
 
     //moves the camera forward relative to its current rotation (yaw)
-    public void walkForward(float distance)
+    public void walkForward(float distance) //for x and z middle is -30, upper is 0 and lower is -60
     {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw));
-        position.x -= xOffset;
-        position.z += zOffset;
+        
+        if(position.x - xOffset > -60 && position.x - xOffset < 0)
+            position.x -= xOffset;
+        if(position.z + zOffset < 0 && position.z - zOffset > -60)
+            position.z += zOffset;
+        
+        if(position.x < -60)
+            position.x = -59;
+        if(position.x > 0)
+            position.x = -1;
+        
+        if(position.z < -60)
+            position.z = -59;
+        if(position.z > 0)
+            position.z = -1;
     }
 
     //moves the camera backward relative to its current rotation (yaw)
@@ -65,8 +78,21 @@ public class FPCameraController {
     {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw));
-        position.x += xOffset;
-        position.z -= zOffset;
+        
+        if(position.x + xOffset < 0 && position.x + xOffset > -60)
+            position.x += xOffset;
+        if(position.z - zOffset > -60 && position.z - zOffset < 0)
+            position.z -= zOffset;
+        
+        if(position.x < -60)
+            position.x = -59;
+        if(position.x > 0)
+            position.x = -1;
+        
+        if(position.z < -60)
+            position.z = -59;
+        if(position.z > 0)
+            position.z = -1;
     }
     
     //strafes the camera left relative to its current rotation (yaw)
@@ -74,8 +100,21 @@ public class FPCameraController {
     {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw-90));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90));
-        position.x -= xOffset;
-        position.z += zOffset;
+        
+        if(position.x - xOffset > -60 && position.x - xOffset < 0)
+            position.x -= xOffset;
+        if(position.z + zOffset < 0 && position.z + zOffset > -60)
+            position.z += zOffset;
+        
+        if(position.x < -60)
+            position.x = -59;
+        if(position.x > 0)
+            position.x = -1;
+        
+        if(position.z < -60)
+            position.z = -59;
+        if(position.z > 0)
+            position.z = -1;
     }
 
     //strafes the camera right relative to its current rotation (yaw)
@@ -83,8 +122,21 @@ public class FPCameraController {
     {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90));
-        position.x -= xOffset;
-        position.z += zOffset;
+        
+        if(position.x - xOffset > -60 && position.x - xOffset < 0)
+            position.x -= xOffset;
+        if(position.z + zOffset < 0 && position.z + zOffset > -60)
+            position.z += zOffset;
+        
+        if(position.x < -60)
+            position.x = -59;
+        if(position.x > 0)
+            position.x = -1;
+        
+        if(position.z < -60)
+            position.z = -59;
+        if(position.z > 0)
+            position.z = -1;
     }
 
     //moves the camera up relative to its current rotation (yaw)
@@ -117,7 +169,7 @@ public class FPCameraController {
 
     public void gameLoop()
     {
-        FPCameraController camera = new FPCameraController(0, 0, 0);
+        FPCameraController camera = new FPCameraController(-30, -60, -30); //for x and z middle is -30, upper is 0 and lower is -60
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f; //length of frame
