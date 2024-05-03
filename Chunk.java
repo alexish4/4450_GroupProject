@@ -182,7 +182,20 @@ public class Chunk {
             return createTexCube(x, y, 5);  //bedrock
         }
         else if (level < 0.7) {
-            return createTexCube(x, y, 3);  //stone
+            Random random = new Random();
+            int randomNumber = random.nextInt(100) + 1;
+            if(randomNumber<5){    // 5% chance to generate diamond
+                return createTexCube(x, y, 10);
+            }else if(randomNumber<10){  // 10% change to generate gold
+                return createTexCube(x, y, 9);
+            }else if(randomNumber<15){  // 15% chance to generate iron
+                return createTexCube(x, y, 8);
+            }else if(randomNumber<20){  // 20% chance to generate coal
+                return createTexCube(x, y, 7);
+            }else{
+                return createTexCube(x, y, 3);  //stone
+            }
+            
         }
         else {
             return createTexCube(x, y, 2);  //dirt
@@ -395,6 +408,142 @@ public class Chunk {
                     x + offset*1, y + offset*2,
                     x + offset*1, y + offset*1,
                     x + offset*2, y + offset*1,
+                };
+            //COAL
+            case 7:
+                return new float[] {
+                    //TOP
+                    x + offset*3, y + offset*3,
+                    x + offset*2, y + offset*3,
+                    x + offset*2, y + offset*2,
+                    x + offset*3, y + offset*2,
+                    //BOTTOM
+                    x + offset*3, y + offset*3,
+                    x + offset*2, y + offset*3,
+                    x + offset*2, y + offset*2,
+                    x + offset*3, y + offset*2,
+                    //FRONT
+                    x + offset*3, y + offset*3,
+                    x + offset*2, y + offset*3,
+                    x + offset*2, y + offset*2,
+                    x + offset*3, y + offset*2,
+                    //BACK
+                    x + offset*3, y + offset*3,
+                    x + offset*2, y + offset*3,
+                    x + offset*2, y + offset*2,
+                    x + offset*3, y + offset*2,
+                    //LEFT
+                    x + offset*3, y + offset*3,
+                    x + offset*2, y + offset*3,
+                    x + offset*2, y + offset*2,
+                    x + offset*3, y + offset*2,
+                    //RIGHT
+                    x + offset*3, y + offset*3,
+                    x + offset*2, y + offset*3,
+                    x + offset*2, y + offset*2,
+                    x + offset*3, y + offset*2,
+                };
+            //IRON
+            case 8:
+                return new float[] {
+                    //TOP
+                    x + offset*2, y + offset*3,
+                    x + offset*1, y + offset*3,
+                    x + offset*1, y + offset*2,
+                    x + offset*2, y + offset*2,
+                    //BOTTOM
+                    x + offset*2, y + offset*3,
+                    x + offset*1, y + offset*3,
+                    x + offset*1, y + offset*2,
+                    x + offset*2, y + offset*2,
+                    //FRONT
+                    x + offset*2, y + offset*3,
+                    x + offset*1, y + offset*3,
+                    x + offset*1, y + offset*2,
+                    x + offset*2, y + offset*2,
+                    //BACK
+                    x + offset*3, y + offset*3,
+                    x + offset*2, y + offset*3,
+                    x + offset*2, y + offset*2,
+                    x + offset*3, y + offset*2,
+                    //LEFT
+                    x + offset*2, y + offset*3,
+                    x + offset*1, y + offset*3,
+                    x + offset*1, y + offset*2,
+                    x + offset*2, y + offset*2,
+                    //RIGHT
+                    x + offset*2, y + offset*3,
+                    x + offset*1, y + offset*3,
+                    x + offset*1, y + offset*2,
+                    x + offset*2, y + offset*2,
+                };
+            //GOLD
+            case 9:
+                return new float[] {
+                    //TOP
+                    x + offset*1, y + offset*3,
+                    x + offset*0, y + offset*3,
+                    x + offset*0, y + offset*2,
+                    x + offset*1, y + offset*2,
+                    //BOTTOM
+                    x + offset*1, y + offset*3,
+                    x + offset*0, y + offset*3,
+                    x + offset*0, y + offset*2,
+                    x + offset*1, y + offset*2,
+                    //FRONT
+                    x + offset*1, y + offset*3,
+                    x + offset*0, y + offset*3,
+                    x + offset*0, y + offset*2,
+                    x + offset*1, y + offset*2,
+                    //BACK
+                    x + offset*1, y + offset*3,
+                    x + offset*0, y + offset*3,
+                    x + offset*0, y + offset*2,
+                    x + offset*1, y + offset*2,
+                    //LEFT
+                    x + offset*1, y + offset*3,
+                    x + offset*0, y + offset*3,
+                    x + offset*0, y + offset*2,
+                    x + offset*1, y + offset*2,
+                    //RIGHT
+                    x + offset*1, y + offset*3,
+                    x + offset*0, y + offset*3,
+                    x + offset*0, y + offset*2,
+                    x + offset*1, y + offset*2,
+                };
+            //DIAMOND
+            case 10:
+                return new float[] {
+                    //TOP
+                    x + offset*3, y + offset*4,
+                    x + offset*2, y + offset*4,
+                    x + offset*2, y + offset*3,
+                    x + offset*3, y + offset*3,
+                    //BOTTOM
+                    x + offset*3, y + offset*4,
+                    x + offset*2, y + offset*4,
+                    x + offset*2, y + offset*3,
+                    x + offset*3, y + offset*3,
+                    //FRONT
+                    x + offset*3, y + offset*4,
+                    x + offset*2, y + offset*4,
+                    x + offset*2, y + offset*3,
+                    x + offset*3, y + offset*3,
+                    //BACK
+                    x + offset*3, y + offset*4,
+                    x + offset*2, y + offset*4,
+                    x + offset*2, y + offset*3,
+                    x + offset*3, y + offset*3,
+                    //LEFT
+                    x + offset*3, y + offset*4,
+                    x + offset*2, y + offset*4,
+                    x + offset*2, y + offset*3,
+                    x + offset*3, y + offset*3,
+                    //RIGHT
+                    x + offset*3, y + offset*4,
+                    x + offset*2, y + offset*4,
+                    x + offset*2, y + offset*3,
+                    x + offset*3, y + offset*3,
                 };
             default:
                 return new float[] {
