@@ -207,7 +207,7 @@ public class FPCameraController {
         float movementSpeed = .35f;
         //hide the mouse
         Mouse.setGrabbed(true);
-        boolean boundary = false;
+        boolean boundary = false; //player can't leave boundary, but off by default
         
         // keep looping till the display window is closed the ESC key is down
         while (!Display.isCloseRequested() &&
@@ -256,7 +256,7 @@ public class FPCameraController {
             {
                 camera.moveDown(movementSpeed);
             }
-            boolean isKeyDown = Keyboard.isKeyDown(Keyboard.KEY_0);
+            boolean isKeyDown = Keyboard.isKeyDown(Keyboard.KEY_0); //button to change boundary setting, off by default
             if (isKeyDown && !boundaryKeyPressed) 
             {
                 boundary = !boundary;
