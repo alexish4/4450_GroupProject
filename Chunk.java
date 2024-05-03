@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL15.*;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
+import java.util.Random;
 
 
 /**
@@ -49,7 +50,12 @@ public class Chunk {
     
     //call when we modify chunk
     public void rebuildMesh(float startX, float startY, float startZ) {
-        SimplexNoise noise = new SimplexNoise(CHUNK_SIZE, 0.3, 1);
+        
+        long seed = System.currentTimeMillis();
+        
+        Random random = new Random(seed);
+        
+        SimplexNoise noise = new SimplexNoise(CHUNK_SIZE, 0.3, random.nextInt());
         
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();
