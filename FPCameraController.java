@@ -28,6 +28,9 @@ public class FPCameraController {
     private Vector3Float me;
     private Chunk chunk = new Chunk(0,0,0);
     
+    //private boolean boundary;
+    private boolean boundaryKeyPressed = false;
+    
     public FPCameraController(float x, float y, float z)
     {
         //instantiate position Vector3f to the x y z params.
@@ -52,91 +55,116 @@ public class FPCameraController {
     }
 
     //moves the camera forward relative to its current rotation (yaw)
-    public void walkForward(float distance) //for x and z middle is -30, upper is 0 and lower is -60
+    public void walkForward(float distance, boolean boundary) //for x and z middle is -30, upper is 0 and lower is -60
     {
+        //System.out.println("Boundary toggled: " + boundary);
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw));
         
-        if(position.x - xOffset > -60 && position.x - xOffset < 0)
+        if(boundary) {
+            if(position.x - xOffset > -60 && position.x - xOffset < 0)
+                position.x -= xOffset;
+            if(position.z + zOffset < 0 && position.z - zOffset > -60)
+                position.z += zOffset;
+
+            if(position.x < -60)
+                position.x = -59;
+            if(position.x > 0)
+                position.x = -1;
+
+            if(position.z < -60)
+                position.z = -59;
+            if(position.z > 0)
+                position.z = -1;
+        }
+        else {
             position.x -= xOffset;
-        if(position.z + zOffset < 0 && position.z - zOffset > -60)
             position.z += zOffset;
-        
-        if(position.x < -60)
-            position.x = -59;
-        if(position.x > 0)
-            position.x = -1;
-        
-        if(position.z < -60)
-            position.z = -59;
-        if(position.z > 0)
-            position.z = -1;
+        }
     }
 
     //moves the camera backward relative to its current rotation (yaw)
-    public void walkBackwards(float distance)
+    public void walkBackwards(float distance, boolean boundary)
     {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw));
         
-        if(position.x + xOffset < 0 && position.x + xOffset > -60)
+        if(boundary) {
+            if(position.x + xOffset < 0 && position.x + xOffset > -60)
+                position.x += xOffset;
+            if(position.z - zOffset > -60 && position.z - zOffset < 0)
+                position.z -= zOffset;
+
+            if(position.x < -60)
+                position.x = -59;
+            if(position.x > 0)
+                position.x = -1;
+
+            if(position.z < -60)
+                position.z = -59;
+            if(position.z > 0)
+                position.z = -1;
+        }
+        else {
             position.x += xOffset;
-        if(position.z - zOffset > -60 && position.z - zOffset < 0)
             position.z -= zOffset;
-        
-        if(position.x < -60)
-            position.x = -59;
-        if(position.x > 0)
-            position.x = -1;
-        
-        if(position.z < -60)
-            position.z = -59;
-        if(position.z > 0)
-            position.z = -1;
+        }
     }
     
     //strafes the camera left relative to its current rotation (yaw)
-    public void strafeLeft(float distance)
+    public void strafeLeft(float distance, boolean boundary)
     {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw-90));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw-90));
         
-        if(position.x - xOffset > -60 && position.x - xOffset < 0)
+        if(boundary) {
+            if(position.x - xOffset > -60 && position.x - xOffset < 0)
+                position.x -= xOffset;
+            if(position.z + zOffset < 0 && position.z + zOffset > -60)
+                position.z += zOffset;
+
+            if(position.x < -60)
+                position.x = -59;
+            if(position.x > 0)
+                position.x = -1;
+
+            if(position.z < -60)
+                position.z = -59;
+            if(position.z > 0)
+                position.z = -1;
+        }
+        else {
             position.x -= xOffset;
-        if(position.z + zOffset < 0 && position.z + zOffset > -60)
             position.z += zOffset;
-        
-        if(position.x < -60)
-            position.x = -59;
-        if(position.x > 0)
-            position.x = -1;
-        
-        if(position.z < -60)
-            position.z = -59;
-        if(position.z > 0)
-            position.z = -1;
+        }
     }
 
     //strafes the camera right relative to its current rotation (yaw)
-    public void strafeRight(float distance)
+    public void strafeRight(float distance, boolean boundary)
     {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw+90));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90));
         
-        if(position.x - xOffset > -60 && position.x - xOffset < 0)
+        if(boundary) {
+            if(position.x - xOffset > -60 && position.x - xOffset < 0)
+                position.x -= xOffset;
+            if(position.z + zOffset < 0 && position.z + zOffset > -60)
+                position.z += zOffset;
+
+            if(position.x < -60)
+                position.x = -59;
+            if(position.x > 0)
+                position.x = -1;
+
+            if(position.z < -60)
+                position.z = -59;
+            if(position.z > 0)
+                position.z = -1;
+        }
+        else {
             position.x -= xOffset;
-        if(position.z + zOffset < 0 && position.z + zOffset > -60)
             position.z += zOffset;
-        
-        if(position.x < -60)
-            position.x = -59;
-        if(position.x > 0)
-            position.x = -1;
-        
-        if(position.z < -60)
-            position.z = -59;
-        if(position.z > 0)
-            position.z = -1;
+        }
     }
 
     //moves the camera up relative to its current rotation (yaw)
@@ -179,6 +207,7 @@ public class FPCameraController {
         float movementSpeed = .35f;
         //hide the mouse
         Mouse.setGrabbed(true);
+        boolean boundary = false;
         
         // keep looping till the display window is closed the ESC key is down
         while (!Display.isCloseRequested() &&
@@ -204,20 +233,20 @@ public class FPCameraController {
             //so on a slow computer you move just as fast as on a fast computer
             if (Keyboard.isKeyDown(Keyboard.KEY_W))//move forward
             {
-                camera.walkForward(movementSpeed);
+                camera.walkForward(movementSpeed, boundary);
             }
             if (Keyboard.isKeyDown(Keyboard.KEY_S))//move backwards
             {
-                camera.walkBackwards(movementSpeed);
+                camera.walkBackwards(movementSpeed, boundary);
             }
 
             if (Keyboard.isKeyDown(Keyboard.KEY_A))//strafe left 
             {
-                camera.strafeLeft(movementSpeed);
+                camera.strafeLeft(movementSpeed, boundary);
             }
             if (Keyboard.isKeyDown(Keyboard.KEY_D))//strafe right 
             {
-                camera.strafeRight(movementSpeed);
+                camera.strafeRight(movementSpeed, boundary);
             }
             if (Keyboard.isKeyDown(Keyboard.KEY_SPACE))//move up 
             {
@@ -227,6 +256,15 @@ public class FPCameraController {
             {
                 camera.moveDown(movementSpeed);
             }
+            boolean isKeyDown = Keyboard.isKeyDown(Keyboard.KEY_0);
+            if (isKeyDown && !boundaryKeyPressed) 
+            {
+                boundary = !boundary;
+                boundaryKeyPressed = true;
+                System.out.println("Boundary toggled: " + boundary);
+            }
+            else if(!isKeyDown)
+                boundaryKeyPressed = false;
 
             //set the modelview matrix back to the identity
             glLoadIdentity();
