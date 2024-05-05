@@ -67,6 +67,7 @@ public class FPCameraController {
             if(position.z + zOffset < 0 && position.z - zOffset > -60)
                 position.z += zOffset;
 
+            //teleport if boundaries are on and out of bounds
             if(position.x < -60)
                 position.x = -59;
             if(position.x > 0)
@@ -95,6 +96,7 @@ public class FPCameraController {
             if(position.z - zOffset > -60 && position.z - zOffset < 0)
                 position.z -= zOffset;
 
+            //teleport if boundaries are on and out of bounds
             if(position.x < -60)
                 position.x = -59;
             if(position.x > 0)
@@ -123,6 +125,7 @@ public class FPCameraController {
             if(position.z + zOffset < 0 && position.z + zOffset > -60)
                 position.z += zOffset;
 
+            //teleport if boundaries are on and out of bounds
             if(position.x < -60)
                 position.x = -59;
             if(position.x > 0)
@@ -151,6 +154,7 @@ public class FPCameraController {
             if(position.z + zOffset < 0 && position.z + zOffset > -60)
                 position.z += zOffset;
 
+            //teleport if boundaries are on and out of bounds
             if(position.x < -60)
                 position.x = -59;
             if(position.x > 0)
